@@ -8,7 +8,9 @@ import app from "./app";
 if(cluster.isMaster) {
   console.log(`Master ${process.pid} is running`);
 
-  for(let i=0; i<numCPUs; i++) {
+  const clusterEnv = (process.env.CLUSTER === '0' || Number.isNaN(Number(process.env.CLUSTER))) ? Number.MAX_SAFE_INTEGER : Number(process.env.CLUSTER);
+  const clusterNum = numCPUs > clusterEnv ? clusterEnv : numCPUs;
+  for(let i=0; i<clusterNum; i++) {
     cluster.fork();
   }
 
