@@ -1,6 +1,10 @@
 {
   "name": "express-middleware-server",
   "version": "1.0.0",
+  "scripts": {
+    "build": "yarn run tsc",
+    "postinstall": "yarn run build"
+  },
   "repository": "git@github.com:walk8243/express-middleware-server.git",
   "author": "walk8243 <walk8243@gmail.com>",
   "license": "MIT",
