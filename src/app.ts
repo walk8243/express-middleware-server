@@ -11,4 +11,12 @@ app.set('port', process.env.PORT || 3000);
 
 app.use(router);
 
+app.use((req, res, next) => {
+  res.sendStatus(404);
+});
+app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
+  console.error(err.stack);
+  res.sendStatus(500);
+});
+
 export default app;
