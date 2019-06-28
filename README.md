@@ -15,3 +15,10 @@ Expressのサーバー部のみ
   - サーバー共通のミドルウェアの設定
 - router.ts
   - アプリケーション内のルーターを指定
+
+## 設定項目
+| 設定項目 | 環境変数 | package.json | デフォルト値 |
+|---|---|---|---|
+| クラスター数 | CLUSTER | cluster | 0(CPUの数) |
+| ポート番号 | PORT | port | 3000 |
+| ルーターの場所 | ROUTER | router | dist/router.js |
