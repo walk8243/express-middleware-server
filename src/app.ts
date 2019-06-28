@@ -9,7 +9,7 @@ const app = express();
 // ルーター前に使用するミドルウェア
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || process.env.npm_package_config_port || 3000);
 
 // ルーターを使用
 app.use(router);
