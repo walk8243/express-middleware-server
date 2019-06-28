@@ -1,12 +1,8 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import * as path from 'path';
-import * as fs from 'fs';
 
 // ルーターを呼び出し
-const appRouter = path.resolve(process.cwd(), 'dist/router.js');
-const routerPath = fs.statSync(appRouter).isFile() ? appRouter : './router';
-const router = require(routerPath).default;
+import router from './router';
 
 const app = express();
 
