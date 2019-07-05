@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "scripts": {
     "build": "yarn run tsc",
-    "postinstall": "yarn run build"
+    "postinstall": "yarn run build",
+    "test": "yarn run nyc mocha test/test.ts"
   },
   "bin": {
     "server": "./bin/server"
