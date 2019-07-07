@@ -1,3 +1,5 @@
+process.env.SERVER = 'true';
+
 require('./server');
 require('./master');
 require('./worker');
