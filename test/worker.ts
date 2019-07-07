@@ -2,11 +2,12 @@ import { fake, stub, SinonStub } from 'sinon';
 import * as assert from 'assert';
 import express from 'express';
 import path from 'path';
+import { Server } from 'https';
 
 describe('worker', () => {
   const appPath = path.resolve(__dirname, '../src/app.ts');
   const dummyApp = express();
-  let workerObj!: { default: () => {}, listenCallback: () => {} };
+  let workerObj!: { default: any, listenCallback: any };
   before(() => {
     process.env.ROUTER = 'false';
     require('../src/app');
@@ -57,6 +58,36 @@ describe('worker', () => {
     it('正常系', () => {
       listenCallback();
       assert.ok(stubAppGet.calledOnce);
+    });
+  });
+  describe('統合', () => {
+    let stubListenCallback!: SinonStub;
+    let stubAppGet!: SinonStub;
+    let worker!: any;
+    before(() => {
+      worker = workerObj.default;
+    });
+    before(() => {
+      stubListenCallback = stub(workerObj, 'listenCallback');
+      stubAppGet = stub(dummyApp, 'get');
+    });
+    beforeEach(() => {
+      stubListenCallback.reset();
+      stubAppGet.reset();
+      stubListenCallback.callsFake(fake());
+      stubAppGet.callsFake(fake());
+      stubAppGet.withArgs('port').returns(3000);
+    });
+    after(() => {
+      stubListenCallback.restore();
+      stubAppGet.restore();
+    });
+    it('正常系', (done) => {
+      // stubListenCallback.callsFake(done);
+      const server = worker();
+      server.on('listening', () => {
+        server.close(done);
+      });
     });
   });
 });

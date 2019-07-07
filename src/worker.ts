@@ -1,8 +1,9 @@
 import app from './app';
+import { Server } from 'http';
 
-export default function worker() {
+export default function worker(): Server {
   // Workerプロセスの処理
-  app.listen(app.get('port'), listenCallback);
+  return app.listen(app.get('port'), listenCallback);
 }
 
 export function listenCallback() {
