@@ -2,7 +2,6 @@ import { fake, stub, SinonStub } from 'sinon';
 import * as assert from 'assert';
 import express from 'express';
 import path from 'path';
-import { Server } from 'https';
 
 describe('worker', () => {
   const appPath = path.resolve(__dirname, '../src/app.ts');
@@ -83,7 +82,6 @@ describe('worker', () => {
       stubAppGet.restore();
     });
     it('正常系', (done) => {
-      // stubListenCallback.callsFake(done);
       const server = worker();
       server.on('listening', () => {
         server.close(done);
