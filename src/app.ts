@@ -2,7 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 
 // ルーターを呼び出し
-import router from './router';
+import getRouter from './router';
 
 const app = express();
 
@@ -13,7 +13,7 @@ app.set('port', process.env.PORT || process.env.npm_package_config_port || 3000)
 /* ここまで ルーター前に使用するミドルウェア */
 
 // ルーターを使用
-app.use(router);
+app.use(getRouter());
 
 /* ここから ルーター後に使用するミドルウェア */
 app.use((req, res, next) => {

@@ -2,16 +2,31 @@ import express from 'express';
 import * as path from 'path';
 import * as fs from 'fs';
 
-let router!: express.Router;
-if(process.env.SERVER == 'true' || process.env.ROUTER == 'false' || process.env.npm_package_config_router == 'false') {
-  router = express.Router();
-} else {
-  const appRouter = path.resolve(process.cwd(), process.env.ROUTER || process.env.npm_package_config_router || 'dist/router.js');
-  if(fs.statSync(appRouter).isFile()) {
-    router = require(appRouter).default;
+export const routerLib = {
+  isServer,
+  getRouterPath,
+};
+
+export default function getRouter(): express.Router {
+  if(routerLib.isServer()) {
+    return express.Router();
   } else {
-    throw new Error(`${appRouter} is not exists!`);
+    const appRouter = routerLib.getRouterPath();
+    if(fs.statSync(appRouter).isFile()) {
+      return require(appRouter).default;
+    } else {
+      throw new Error(`${appRouter} is not file!`);
+    }
   }
 }
 
-export default router;
+function isServer(): boolean {
+  if(process.env.SERVER == 'true' || process.env.ROUTER == 'false' || process.env.npm_package_config_router == 'false') {
+    return true;
+  }
+  return false;
+}
+
+function getRouterPath(): string {
+  return path.resolve(process.cwd(), process.env.ROUTER || process.env.npm_package_config_router || 'dist/router.js');
+}
