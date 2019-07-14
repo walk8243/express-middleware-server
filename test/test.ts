@@ -5,3 +5,4 @@ require('./master');
 require('./worker');
 require('./app');
 require('./router');
+require('./middleware');
