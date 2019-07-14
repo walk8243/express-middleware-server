@@ -1,7 +1,6 @@
 import { fake, stub, SinonStub } from 'sinon';
 import assert from 'assert';
 import cluster from 'cluster';
-import path from 'path';
 import * as master from '../src/master';
 import * as worker from '../src/worker';
 
@@ -9,8 +8,9 @@ describe('server', () => {
   let stubClusterIsMaster!: SinonStub;
   let stubMaster!: SinonStub;
   let stubWorker!: SinonStub;
+  const serverPath = require.resolve('../src/server.ts');
   beforeEach(() => {
-    delete require.cache[path.resolve(__dirname, '../src/server.ts')];
+    delete require.cache[serverPath];
   });
   before(() => {
     stubClusterIsMaster = stub(cluster, 'isMaster');

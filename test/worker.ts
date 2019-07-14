@@ -1,10 +1,9 @@
 import { fake, stub, SinonStub } from 'sinon';
 import * as assert from 'assert';
 import express from 'express';
-import path from 'path';
 
 describe('worker', () => {
-  const appPath = path.resolve(__dirname, '../src/app.ts');
+  const appPath = require.resolve('../src/app.ts');
   const dummyApp = express();
   let workerObj!: { default: any, listenCallback: any };
   before(() => {
