@@ -2,15 +2,13 @@ import { fake, stub, SinonStub } from 'sinon';
 import * as assert from 'assert';
 import express from 'express';
 import cluster from 'cluster';
-import path from 'path';
 import os from 'os';
-import master from '../src/master';
 
 describe('master', () => {
   let stubClusterFork!: SinonStub;
   let stubClusterIsMaster!: SinonStub;
   let stubOsCpus!: SinonStub;
-  const appPath = path.resolve(__dirname, '../src/app.ts');
+  const appPath = require.resolve('../src/app.ts');
   const dummyCpu = { model: 'Intel(R) Core(TM) i7 CPU', speed: 2926, times: {} };
   const dummyCpus = [ dummyCpu, dummyCpu, dummyCpu, dummyCpu ];
   let master!: () => {};
