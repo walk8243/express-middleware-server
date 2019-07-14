@@ -1,4 +1,6 @@
-process.env.SERVER = 'true';
+beforeEach(() => {
+  process.env.SERVER = 'true';
+});
 
 require('./server');
 require('./master');
