@@ -13,7 +13,8 @@
   "author": "walk8243 <walk8243@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "typescript": "^3.9.6"
   },
   "devDependencies": {
     "@types/express": "^4.17.7",
@@ -25,8 +26,7 @@
     "nyc": "^15.1.0",
     "sinon": "^9.0.2",
     "sinon-express-mock": "^2.2.1",
-    "ts-node": "^8.10.2",
-    "typescript": "^3.9.6"
+    "ts-node": "^8.10.2"
   },
   "nyc": {
     "extension": [
